@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140320064129) do
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id"
 
   create_table "posts", force: true do |t|
+    t.integer  "user_id"
     t.integer  "project_id"
     t.text     "content"
     t.datetime "created_at"
@@ -39,12 +40,16 @@ ActiveRecord::Schema.define(version: 20140320064129) do
   end
 
   add_index "posts", ["project_id"], name: "index_posts_on_project_id"
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "projects", force: true do |t|
+    t.integer  "user_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "projects", ["user_id"], name: "index_projects_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

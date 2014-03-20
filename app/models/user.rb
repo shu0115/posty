@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :authentications
+  has_many :projects
+  has_many :posts
 
   private
 

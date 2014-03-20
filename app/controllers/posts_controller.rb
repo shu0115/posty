@@ -1,45 +1,35 @@
-# coding: utf-8
-
 class PostsController < ApplicationController
   permits :project, :content
 
   # GET /posts
   def index
-    @posts = Post.all
-  end
-
-  # GET /posts/1
-  def show(id)
-    @post = Post.find(id)
-  end
-
-  # GET /posts/new
-  def new
-    @post = Post.new
+    @posts = Post.mine(current_user).order(updated_at: :desc)
+    @post  = Post.new
   end
 
   # GET /posts/1/edit
   def edit(id)
-    @post = Post.find(id)
+    @post = Post.mine(current_user).find_by(id: id)
   end
 
   # POST /posts
   def create(post)
-    @post = Post.new(post)
+    @post = current_user.posts.build(post)
 
     if @post.save
-      redirect_to @post, notice: 'Post was successfully created.'
+      redirect_to posts_path
     else
-      render action: 'new'
+      @posts = Post.mine(current_user).order(updated_at: :desc)
+      render action: 'index'
     end
   end
 
   # PUT /posts/1
   def update(id, post)
-    @post = Post.find(id)
+    @post = Post.mine(current_user).find_by(id: id)
 
     if @post.update(post)
-      redirect_to @post, notice: 'Post was successfully updated.'
+      redirect_to posts_path and return
     else
       render action: 'edit'
     end
@@ -47,7 +37,7 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1
   def destroy(id)
-    @post = Post.find(id)
+    @post = Post.mine(current_user).find_by(id: id)
     @post.destroy
 
     redirect_to posts_url
