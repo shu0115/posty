@@ -6,4 +6,4 @@
           = f.text_area :content, wrap: "off", class: "form-control", cols: 10, rows: 10
       .form-group{ style: 'text-align: right;' }
         = f.submit '更新', data: { disable_with: '更新' }, class: 'btn btn-success'
-        = link_to '一覧', posts_path, class: 'btn btn-default'
+        = link_to '一覧', project_posts_path(project_id: @post.project_id), class: 'btn btn-default'
