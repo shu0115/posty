@@ -60,6 +60,8 @@ gem "ruby-duration"
 gem "everywhere"
 gem "redcarpet"
 gem "coderay"
+gem 'thread_safe', '0.2.0'
+
 group :development do
   gem "pry-rails"
   gem "better_errors"
