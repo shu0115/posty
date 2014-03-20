@@ -1,15 +1,16 @@
 class ProjectsController < ApplicationController
   permits :name
 
+  before_action :set_project, only: [:edit, :update, :destroy]
+
   # GET /projects
   def index
-    @projects = Project.order(created_at: :desc)
+    @projects = Project.mine(current_user).order(created_at: :desc)
     @project  = Project.new
   end
 
   # GET /projects/1/edit
   def edit(id)
-    @project = Project.mine(current_user).find_by(id: id)
   end
 
   # POST /projects
@@ -19,15 +20,13 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to projects_url and return
     else
-      @projects = Project.order(created_at: :desc)
+      @projects = Project.mine(current_user).order(created_at: :desc)
       render action: 'index'
     end
   end
 
   # PUT /projects/1
   def update(id, project)
-    @project = Project.mine(current_user).find_by(id: id)
-
     if @project.update(project)
       redirect_to projects_url
     else
@@ -37,9 +36,16 @@ class ProjectsController < ApplicationController
 
   # DELETE /projects/1
   def destroy(id)
-    @project = Project.mine(current_user).find_by(id: id)
     @project.destroy
 
     redirect_to projects_url
+  end
+
+  private
+
+  def set_project
+    @project = Project.mine(current_user).find_by(id: params[:id])
+
+    redirect_to root_path and return if @project.blank?
   end
 end
