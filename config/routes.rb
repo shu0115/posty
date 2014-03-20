@@ -1,4 +1,6 @@
 Posty::Application.routes.draw do
+  resources :projects
+
   resources :posts
 
   root to: 'top#index'

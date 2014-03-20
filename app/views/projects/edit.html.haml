@@ -1,0 +1,9 @@
+.page_top_margin
+  .container{ style: 'width: 500px' }
+    = form_for @project, url: project_path(@project), method: :put, html: { class: 'form-horizontal' } do |f|
+      %fieldset
+        .form-group
+          = f.text_field :name, class: "form-control", size: '50px'
+      .form-group{ style: 'text-align: right;' }
+        = f.submit '更新', data: { disable_with: '更新' }, class: 'btn btn-success'
+        = link_to '一覧', projects_path, class: 'btn btn-default'
