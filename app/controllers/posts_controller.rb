@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
-  permits :project, :content
+  permits :project_id, :content
 
   # GET /posts
-  def index
-    @posts = Post.mine(current_user).order(updated_at: :desc)
-    @post  = Post.new
+  def index(project_id)
+    @posts = Post.mine(current_user).where(project_id: project_id).order(updated_at: :desc)
+    @post  = Post.new(project_id: project_id)
   end
 
   # GET /posts/1/edit
@@ -17,7 +17,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post)
 
     if @post.save
-      redirect_to posts_path
+      redirect_to project_posts_path(@post.project_id)
     else
       @posts = Post.mine(current_user).order(updated_at: :desc)
       render action: 'index'
@@ -29,7 +29,7 @@ class PostsController < ApplicationController
     @post = Post.mine(current_user).find_by(id: id)
 
     if @post.update(post)
-      redirect_to posts_path and return
+      redirect_to project_posts_path(@post.project_id) and return
     else
       render action: 'edit'
     end
@@ -40,6 +40,6 @@ class PostsController < ApplicationController
     @post = Post.mine(current_user).find_by(id: id)
     @post.destroy
 
-    redirect_to posts_url
+    redirect_to project_posts_path(@post.project_id) and return
   end
 end

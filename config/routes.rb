@@ -1,7 +1,7 @@
 Posty::Application.routes.draw do
-  resources :projects
-
-  resources :posts
+  resources :projects, shallow: true do
+    resources :posts
+  end
 
   root to: 'top#index'
 

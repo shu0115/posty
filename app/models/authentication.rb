@@ -3,7 +3,7 @@ class Authentication < ActiveRecord::Base
 
   # バリデーション
   validates :provider, presence: true
-  validates :uid, presence: true
+  validates :uid,      presence: true
 
   # auth情報更新
   def auth_update(auth)

@@ -4,5 +4,6 @@ class Post < ActiveRecord::Base
 
   scope :mine, ->(user) { where( posts: { user_id: user.id } ) }
 
-  validates :content, presence: true
+  validates :project_id, presence: true
+  validates :content,    presence: true
 end

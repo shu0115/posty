@@ -11,8 +11,9 @@
     - # プロジェクト一覧
     - @projects.each do |project|
       .container{ style: 'width: 500px' }
-        .project_name{ style: 'float: left;' }
-          = project.name
+        = link_to project_posts_path(project_id: project.id) do
+          .project_name{ style: 'float: left;' }
+            = project.name
         %div{ style: 'text-align: right;' }
           = link_to '編集', edit_project_path(project), class: 'btn btn-sm btn-success project_list_button'
           = link_to '削除', project, method: :delete, data: { confirm: '削除します。よろしいですか？' }, class: 'btn btn-sm btn-danger project_list_button'

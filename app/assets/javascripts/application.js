@@ -15,3 +15,8 @@
 //= require turbolinks
 //= require flatly/loader
 //= require flatly/bootswatch
+
+$(function(){
+  // aタグにtarget=blank指定
+  $('.target_blank a').attr('target' , '_blank');
+});

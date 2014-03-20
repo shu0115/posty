@@ -3,6 +3,11 @@ class User < ActiveRecord::Base
   has_many :projects
   has_many :posts
 
+  # デフォルトプロジェクト取得
+  def default_project
+    Project.mine(self).where(name: 'Default').first
+  end
+
   private
 
   # ユーザ作成

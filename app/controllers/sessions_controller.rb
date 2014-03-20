@@ -10,6 +10,8 @@ class SessionsController < ApplicationController
     # ユーザ取得or作成
     user = User.find_by(id: authentication.user_id) || User.create_with_auth(authentication)
 
+    Project.where(name: 'Default', user_id: user.id).first_or_create
+
     session[:user_id] = user.id
     # flash[:notice]    = "ログインしました。"
 
