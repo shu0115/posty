@@ -1,4 +1,6 @@
 Posty::Application.routes.draw do
+  resources :posts
+
   root to: 'top#index'
 
   # For OmniAuth

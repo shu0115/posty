@@ -62,6 +62,12 @@ gem "redcarpet"
 gem "coderay"
 gem 'thread_safe', '0.2.0'
 
+# Design Template
+gem 'therubyracer', platforms: :ruby
+gem 'twitter-bootswatch-rails'
+gem 'twitter-bootswatch-rails-fontawesome'
+gem 'twitter-bootswatch-rails-helpers'
+
 group :development do
   gem "pry-rails"
   gem "better_errors"
