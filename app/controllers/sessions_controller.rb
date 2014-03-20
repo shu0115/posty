@@ -16,13 +16,14 @@ class SessionsController < ApplicationController
     # flash[:notice]    = "ログインしました。"
 
     # 保管URLへリダイレクト
-    unless session[:request_url].blank?
-      redirect_to session[:request_url]
-      session[:request_url] = nil
-      return
-    end
+    # unless session[:request_url].blank?
+    #   redirect_to session[:request_url]
+    #   session[:request_url] = nil
+    #   return
+    # end
 
-    redirect_to :root and return
+    # redirect_to :root and return
+    redirect_to project_posts_path(project_id: current_user.default_project.id) and return
   end
 
   # ログアウト
