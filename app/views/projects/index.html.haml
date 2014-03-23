@@ -4,16 +4,17 @@
     = form_for @project, url: projects_path, html: { class: 'form-horizontal' } do |f|
       %fieldset{ style: 'float: left;' }
         .form-group
-          = f.text_field :name, class: "form-control", size: '50px'
+          = f.text_field :name, class: "form-control", size: '50px', placeholder: 'Project Name'
       .form-group{ style: 'text-align: right;' }
-        = f.submit '追加', data: { disable_with: '追加' }, class: 'btn btn-success'
+        = f.submit 'Add', data: { disable_with: 'Add' }, class: 'btn btn-success'
 
-    - # プロジェクト一覧
-    - @projects.each do |project|
-      .container{ style: 'width: 500px' }
-        = link_to project_posts_path(project_id: project.id) do
-          .project_name{ style: 'float: left;' }
-            = project.name
-        %div{ style: 'text-align: right;' }
-          = link_to '編集', edit_project_path(project), class: 'btn btn-sm btn-success project_list_button'
-          = link_to '削除', project, method: :delete, data: { confirm: '削除します。よろしいですか？' }, class: 'btn btn-sm btn-danger project_list_button'
+  - # プロジェクト一覧
+  - @projects.each do |project|
+    .container{ style: 'width: 600px' }
+      = link_to project_posts_path(project_id: project.id) do
+        .project_name{ style: 'float: left;' }
+          = project.name
+      %div{ style: 'text-align: right;' }
+        = link_to "Archives", project_archives_path(project_id: project.id), class: 'btn btn-sm btn-success project_list_button'
+        = link_to 'Edit', edit_project_path(project), class: 'btn btn-sm btn-success project_list_button'
+        = link_to 'Delete', project, method: :delete, data: { confirm: '削除します。よろしいですか？' }, class: 'btn btn-sm btn-danger project_list_button'

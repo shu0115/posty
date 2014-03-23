@@ -1,0 +1,14 @@
+.page_top_margin
+  .container{ style: 'width: 500px' }
+    - @posts.each do |post|
+      .post_content.target_blank
+        = raw markdown(post.content)
+      %div{ style: 'text-align: right;' }
+        = link_to 'Restore', restore_post_path(post), method: :put, class: 'btn btn-sm btn-success'
+  %br
+  %br
+  %br
+
+  %div.text-center
+    = link_to 'Posts', project_posts_path(params[:project_id]), class: 'btn btn-default'
+    = link_to 'Projects', projects_path, class: 'btn btn-default'

@@ -1,6 +1,12 @@
 Posty::Application.routes.draw do
   resources :projects, shallow: true do
-    resources :posts
+    resources :posts do
+      member do
+        put 'archive'
+        put 'restore'
+      end
+    end
+    get 'archives' => 'posts#archives'
   end
 
   root to: 'top#index'

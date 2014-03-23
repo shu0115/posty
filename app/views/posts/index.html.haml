@@ -6,17 +6,19 @@
         .form-group
           = f.text_area :content, wrap: "off", class: "form-control", cols: 10, rows: 10
       .form-group{ style: 'text-align: right;' }
-        = f.submit '作成', data: { disable_with: '作成' }, class: 'btn btn-success'
+        = f.submit 'Add', data: { disable_with: 'Add' }, class: 'btn btn-success'
 
     - @posts.each do |post|
       .post_content.target_blank
         = raw markdown(post.content)
       %div{ style: 'text-align: right;' }
-        = link_to '編集', edit_post_path(post), class: 'btn btn-sm btn-success'
-        = link_to '削除', post_path(post), method: :delete, data: { confirm: "削除します。よろしいですか？" }, class: 'btn btn-sm btn-danger'
+        = link_to 'Archive', archive_post_path(post), method: :put, class: 'btn btn-sm btn-success'
+        = link_to 'Edit', edit_post_path(post), class: 'btn btn-sm btn-success'
+        = link_to 'Delete', post_path(post), method: :delete, data: { confirm: "削除します。よろしいですか？" }, class: 'btn btn-sm btn-danger'
   %br
   %br
   %br
 
   %div.text-center
-    = link_to 'プロジェクト一覧', projects_path, class: 'btn btn-default'
+    = link_to "Archives", project_archives_path(project_id: params[:project_id]), class: 'btn btn-default'
+    = link_to 'Projects', projects_path, class: 'btn btn-default'
