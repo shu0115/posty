@@ -1,13 +1,15 @@
 .page_top_margin
   .container{ style: 'width: 500px' }
+    - # 新規作成フォーム
     = form_for @post, url: project_posts_path(project_id: @post.project_id), html: { class: 'form-horizontal' } do |f|
       = f.hidden_field :project_id
       %fieldset
         .form-group
-          = f.text_area :content, wrap: "off", class: "form-control", cols: 10, rows: 10
+          = f.text_area :content, wrap: "off", class: "form-control", cols: 10, rows: 10, placeholder: @post.project.name
       .form-group{ style: 'text-align: right;' }
         = f.submit 'Add', data: { disable_with: 'Add' }, class: 'btn btn-success'
 
+    - # ポスト一覧
     - @posts.each do |post|
       .post_content.target_blank
         = raw markdown(post.content)
