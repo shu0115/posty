@@ -54,7 +54,9 @@ class PostsController < ApplicationController
 
   # アーカイブ一覧
   def archives(project_id)
-    redirect_to root_path and return if Project.mine(current_user).where(id: project_id).blank?
+    @project = Project.mine(current_user).find_by(id: project_id)
+
+    redirect_to root_path and return if @project.blank?
 
     @posts = Post::ArchivePost.mine(current_user).where(project_id: project_id).order(archive_at: :desc)
   end
