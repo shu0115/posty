@@ -1,12 +1,11 @@
 .page_top_margin
-  .container{ style: 'width: 500px' }
+  .container{ style: 'width: 600px' }
     - # プロジェクト作成フォーム
     = form_for @project, url: projects_path, html: { class: 'form-horizontal' } do |f|
-      %fieldset{ style: 'float: left;' }
-        .form-group
-          = f.text_field :name, class: "form-control", size: '50px', placeholder: 'Project Name'
-      .form-group{ style: 'text-align: right;' }
-        = f.submit 'Add', data: { disable_with: 'Add' }, class: 'btn btn-success'
+      = f.text_field :name, class: "form-control", placeholder: 'Project Name', style: 'width: 500px; float: left;'
+      = f.submit 'Add', data: { disable_with: 'Add' }, class: 'btn btn-success', style: 'margin-left: 10px;'
+  %br
+  %br
 
   - # プロジェクト一覧
   - @projects.each do |project|
